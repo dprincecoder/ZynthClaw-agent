@@ -117,7 +117,7 @@ async def _run_email_delivery(
         await _send_bot_message(
             update,
             context,
-            f"Email sent to {recipient_email} with {sent_count} funding candidates attached as a PDF.",
+            f"Email sent to {recipient_email} with {sent_count} funding candidates attached as a PDF. Also check your spam folder.",
         )
     except EmailServiceError as exc:
         await _send_bot_message(update, context, str(exc))
@@ -135,7 +135,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         "/scan <topic>\n"
         "/repo <github_url>\n"
         "/funding_targets\n"
-        "/email_targets <email>\n"
+        "/request_email_report <email>\n"
 
     )
     _set_pending_action(context, None)
@@ -273,7 +273,7 @@ def build_application(token: str) -> Application:
     application.add_handler(CommandHandler("scan", scan_command))
     application.add_handler(CommandHandler("repo", repo_command))
     application.add_handler(CommandHandler("funding_targets", funding_targets_command))
-    application.add_handler(CommandHandler("request_email", email_targets_command))
+    application.add_handler(CommandHandler("request_email_report", email_targets_command))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_message_handler))
     # application.add_handler(CommandHandler("h", help_command))
 
