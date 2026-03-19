@@ -44,7 +44,7 @@ def _get_headers() -> Dict[str, str]:
 def _get_user_id(handle: str) -> str:
     url = f"https://api.x.com/2/users/by/username/{handle}"
     print(f"[X] Looking up user id for @{handle} via {url}")
-    resp = requests.get(url, headers=_get_headers(), timeout=20)
+    resp = requests.get(url, headers=_get_headers(), timeout=10)
     if resp.status_code != 200:
         print(f"[X] User lookup failed for @{handle}: {resp.status_code} {resp.text}")
         raise TwitterScraperError(f"Failed to look up X user @{handle}: {resp.status_code}")
@@ -61,7 +61,7 @@ def fetch_user_bio(handle: str) -> Optional[str]:
     handle = handle.lstrip("@").strip()
     url = f"https://api.x.com/2/users/by/username/{handle}?user.fields=description"
     print(f"[X] Fetching bio for @{handle} via {url}")
-    resp = requests.get(url, headers=_get_headers(), timeout=20)
+    resp = requests.get(url, headers=_get_headers(), timeout=10)
     if resp.status_code != 200:
         print(f"[X] Bio fetch failed for @{handle}: {resp.status_code} {resp.text}")
         return None
@@ -99,7 +99,7 @@ def fetch_user_tweets_and_replies(handle: str, max_tweets: int = 20, max_replies
         "tweet.fields": "created_at,public_metrics,referenced_tweets",
     }
     print(f"[X] Fetching tweets for @{handle} from {tweets_url} with params={params}")
-    resp = requests.get(tweets_url, headers=_get_headers(), params=params, timeout=20)
+    resp = requests.get(tweets_url, headers=_get_headers(), params=params, timeout=10)
     if resp.status_code != 200:
         print(f"[X] Tweet fetch failed for @{handle}: {resp.status_code} {resp.text}")
         raise TwitterScraperError(f"Failed to fetch tweets for @{handle}: {resp.status_code}")
@@ -141,7 +141,7 @@ def fetch_user_tweets_and_replies(handle: str, max_tweets: int = 20, max_replies
             "tweet.fields": "created_at,public_metrics,referenced_tweets",
         }
         print(f"[X] Fetching replies to @{handle} from {search_url} with params={params}")
-        resp = requests.get(search_url, headers=_get_headers(), params=params, timeout=20)
+        resp = requests.get(search_url, headers=_get_headers(), params=params, timeout=10)
         if resp.status_code != 200:
             print(f"[X] Reply search failed for @{handle}: {resp.status_code} {resp.text}")
             # We treat this as non-fatal and just return tweets without replies
@@ -224,7 +224,7 @@ def fetch_user_posts(handle: str, max_posts: int = 10) -> List[Tweet]:
         "tweet.fields": "created_at,public_metrics,referenced_tweets",
     }
     print(f"[X] Fetching posts for @{handle} from {tweets_url} with params={params}")
-    resp = requests.get(tweets_url, headers=_get_headers(), params=params, timeout=20)
+    resp = requests.get(tweets_url, headers=_get_headers(), params=params, timeout=10)
     if resp.status_code != 200:
         print(f"[X] Post fetch failed for @{handle}: {resp.status_code} {resp.text}")
         raise TwitterScraperError(f"Failed to fetch tweets for @{handle}: {resp.status_code}")
@@ -280,7 +280,7 @@ def fetch_replies_by_conversation_ids(
             "user.fields": "username",
         }
         print(f"[X] Fetching conversation replies for cid={cid} via {search_url} query={query!r}")
-        resp = requests.get(search_url, headers=_get_headers(), params=params, timeout=20)
+        resp = requests.get(search_url, headers=_get_headers(), params=params, timeout=10)
         if resp.status_code != 200:
             print(f"[X] Conversation fetch failed cid={cid}: {resp.status_code} {resp.text}")
             out[cid] = []

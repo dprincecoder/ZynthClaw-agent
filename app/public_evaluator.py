@@ -37,7 +37,8 @@ def analyze_x_handle(handle: str) -> XSignals:
     try:
         print(f"[Evaluator] Analyzing X handle @{handle}")
         # Prefer grouped "post -> replies" threads for raw export and better review.
-        threads = fetch_user_posts_with_replies(handle, max_posts=10, max_replies_per_post=30)
+        # Keep this intentionally small so we don't spend minutes waiting on X.
+        threads = fetch_user_posts_with_replies(handle, max_posts=5, max_replies_per_post=20)
         raw_tweets = [t.post for t in threads]
         raw_replies = [r for t in threads for r in t.replies]
     except TwitterScraperError as exc:

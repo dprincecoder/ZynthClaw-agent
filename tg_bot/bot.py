@@ -263,7 +263,7 @@ async def text_message_handler(update: Update, context: ContextTypes.DEFAULT_TYP
             )
             if preview_threads:
                 parts: list[str] = []
-                parts.append("<b>Recent X posts from @{handle}</b>")
+                parts.append(f"<b>Recent X posts from @{handle}</b>")
                 for idx, th in enumerate(preview_threads, start=1):
                     post_text = (th.post.text or "").strip()
                     post_one_line = " ".join(post_text.split())
