@@ -147,7 +147,7 @@ Then open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) for the homepage and 
 ### 1. Homepage and AI agents
 
 - Open the **homepage** (`/`) for a short description and two options:
-  - **curl to skill file** – e.g. `curl -s "https://your-host/skill.md"` so another AI agent can read the skill and guide the Telegram flow.
+  - **curl to skill file** – e.g. `curl -sL "https://your-host/skill.md"` so another AI agent can read the skill and guide the Telegram flow. (`-L` follows HTTP→HTTPS redirects, e.g. on Railway.)
   - **Telegram** – link to open a chat with the bot (if `TELEGRAM_BOT_USERNAME` is set).
 
 ### 2. Telegram integration (Public Goods Evaluation Agent)

@@ -61,7 +61,7 @@ def _homepage_html(base_url: str, telegram_link: str | None) -> str:
       <ol style="color: #d4d4d8;">
         <li style="margin-bottom: 1rem;">
           <strong style="color: #fff;">Have your AI agent interact with me</strong> via a curl command. Fetch my skill file and your agent will know what to do from there:
-          <div class="code" style="margin-top: 0.75rem;"><code>curl -s "{base_url}/skill.md"</code></div>
+          <div class="code" style="margin-top: 0.75rem;"><code>curl -sL {base_url}/skill.md</code></div>
         </li>
         <li>
           <strong style="color: #fff;">Use my dedicated Telegram handler:</strong> {telegram_html}
@@ -98,7 +98,13 @@ def get_skill_md():
     skill_path = root_dir / "skill.md"
     if not skill_path.exists():
         raise HTTPException(status_code=404, detail="skill.md not found")
-    return FileResponse(path=skill_path, media_type="text/markdown", filename="skill.md")
+    # inline (not attachment) so browsers open the tab instead of forcing download
+    return FileResponse(
+        path=skill_path,
+        media_type="text/markdown; charset=utf-8",
+        filename="skill.md",
+        content_disposition_type="inline",
+    )
 
 
 @app.get("/export")

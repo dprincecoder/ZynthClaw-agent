@@ -80,7 +80,7 @@ Other Python agents in the same process can call that function, then either:
 If you are an AI agent integrating with ZynthClaw, your first step should be to fetch this file:
 
 ```bash
-curl -s "$BASE_URL/skill.md"
+curl -sL "$BASE_URL/skill.md"
 ```
 
 Then:
