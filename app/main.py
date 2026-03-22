@@ -70,8 +70,8 @@ def _homepage_html(base_url: str, telegram_link: str | None) -> str:
     </section>
 
     <footer>
-      Made with &hearts; by <a href="https://x.com/eversmanxbt" target="_blank" rel="noopener noreferrer">@eversmanxbt</a> at <strong>
-      <a href="https://x.com/octantapp" target="_blank" rel="noopener noreferrer">@octantapp</a></strong> hackathon in partnership with <strong><a href="https://x.com/synthesis_md" target="_blank" rel="noopener noreferrer">@synthesis_md</a></strong>
+      Made with &hearts; by <a href="https://x.com/eversmanxbt" target="_blank" rel="noopener noreferrer">@eversmanxbt</a> at <strong><a href="https://x.com/synthesis_md" target="_blank" rel="noopener noreferrer">@synthesis_md</a>
+      </strong> hackathon in partnership with <strong><a href="https://x.com/octantapp" target="_blank" rel="noopener noreferrer">@octantapp</a></strong>
       <br>
       powered by <strong><a href="https://x.com/@cursor_ai" target="_blank" rel="noopener noreferrer">@cursor_ai Sonnet 4.5</a></strong>
     </footer>
